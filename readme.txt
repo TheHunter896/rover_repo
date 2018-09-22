@@ -35,3 +35,8 @@ simple_app.js <-- This is the game without obstacles
 complex_app.js <-- This is the game with obstacles
 app.js <-- This is the game with the two modes in the same doc
 html_rover_game.html <-- Basic interface to start the game
+
+
+This is my second game ever made with javascript the first being the blackjack which is also in my profile :)
+
+Happy coding :D
