@@ -5,6 +5,8 @@ var win_global_x;
 var win_global_y;
 var global_obs_x = [];
 var global_obs_y = [];
+var rover_ini_x;
+var rover_ini_y;
 
 
 function inception(){
@@ -51,26 +53,28 @@ function simple(){
 
     sg();
 
-    var what_to_do = prompt("What do you want to do next?");
+    do{
+      var what_to_do = prompt("What do you want to do next?");}while(what_to_do != "Exit");
     if(what_to_do.length > 1 && what_to_do !== "moveBack" && what_to_do !=="moveForward" && what_to_do !== "moveRight" && what_to_do !== "moveLeft")
     {
         var i;
         what_to_do.split();
         for( i < 0; i < what_to_do.length; i++){
+          creating_table();
+          ini_win(win_global_x, win_global_y); 
+          impl_obstacles();
+         
             switch(what_to_do[i]){
-              case what_to_do = "l":
+              case what_to_do[i] = "l":
               west(current_rover_x,current_rover_y);
               break;
-              case what_to_do = "r":
+              case what_to_do[i] = "r":
               east(current_rover_x,current_rover_y);
               break;
-              case what_to_do = "b":
+              case what_to_do[i] = "b":
               south(current_rover_x,current_rover_y);
               break;
-              case what_to_do = "f":
-              north(current_rover_x,current_rover_y);
-              break;
-              case what_to_do = "f":
+              case what_to_do[i] = "f":
               north(current_rover_x,current_rover_y);
               break;
               default:
@@ -80,6 +84,12 @@ function simple(){
     }
     else{
       do{
+
+        creating_table();
+        ini_win(win_global_x, win_global_y); 
+        impl_obstacles();
+        
+
     switch(what_to_do){
       case what_to_do = "moveBack":
       south(current_rover_x,current_rover_y);
@@ -131,37 +141,96 @@ function complex(){
   sg();
   
  
-  do{ 
   var what_to_do = prompt("What do you want to do next?");
-  switch(what_to_do){
-    case what_to_do = "moveBack":
-    south(current_rover_x,current_rover_y);
-    break;
-    case what_to_do = "moveForward":
-    north(current_rover_x, current_rover_y);
-    break;
-    case what_to_do = "moveRight":
-    east(current_rover_x, current_rover_y);
-    break;
-    case what_to_do = "moveLeft":
-    west(current_rover_x, current_rover_y);
-    break;
-    default:
+    if(what_to_do.length > 1 && what_to_do !== "moveBack" && what_to_do !=="moveForward" && what_to_do !== "moveRight" && what_to_do !== "moveLeft")
+    {
+        var i;
+        what_to_do.split();
+        for( i < 0; i < what_to_do.length; i++){
+          creating_table();
+          ini_win(win_global_x, win_global_y); 
+          impl_obstacles();
+            switch(what_to_do[i]){
+              case what_to_do[i] = "l":
+              west(current_rover_x,current_rover_y);
+              break;
+              case what_to_do[i] = "r":
+              east(current_rover_x,current_rover_y);
+              break;
+              case what_to_do[i] = "b":
+              south(current_rover_x,current_rover_y);
+              break;
+              case what_to_do[i] = "f":
+              north(current_rover_x,current_rover_y);
+              break;
+              case what_to_do[i] = "f":
+              north(current_rover_x,current_rover_y);
+              break;
+              default:
+              console.log("Wrong letter, not executing anything.");
+            }
+        }
+    }
+    else{
+      do{
+        
+        creating_table();
+        ini_win(win_global_x, win_global_y); 
+        impl_obstacles();
+  
+
+    switch(what_to_do){
+      case what_to_do = "moveBack":
+      south(current_rover_x,current_rover_y);
       break;
-    }
-    if(current_rover_x == win_global_x && current_rover_y == win_global_y){
-      console.log("\nYou win, you have brought the Rover to a place of interest for the scientists and humanity has advanced thanks to your efforts! Nice ride pilot.\n");
-      what_to_do = "Exit"; // <-- We break the while with a simple trigger
-    }
-   }while(what_to_do != "Exit");
-   
-   console.log("You have exited the game");
+      case what_to_do = "moveForward":
+      north(current_rover_x, current_rover_y);
+      break;
+      case what_to_do = "moveRight":
+      east(current_rover_x, current_rover_y);
+      break;
+      case what_to_do = "moveLeft":
+      west(current_rover_x, current_rover_y);
+      break;
+      case what_to_do = "l":
+      west(current_rover_x,current_rover_y);
+      break;
+      case what_to_do = "r":
+      east(current_rover_x,current_rover_y);
+      break;
+      case what_to_do = "b":
+      south(current_rover_x,current_rover_y);
+      break;
+      case what_to_do = "f":
+      north(current_rover_x,current_rover_y);
+      break;
+      case what_to_do = "f":
+      north(current_rover_x,current_rover_y);
+      break;
+      case what_to_do = "tracker":
+      tracking();
+      break;
+      default:
+        console.log("Write a specific command to do, if you have doubts restart the game and watch the instructions");
+        break;
+      }
+      if(current_rover_x == win_global_x && current_rover_y == win_global_y){
+        console.log("\nYou win, you have brought the Rover to a place of interest for the scientists and humanity has advanced thanks to your efforts! Nice ride pilot.\n");
+        what_to_do = "Exit";
+      }
+     }while(what_to_do != "Exit");
+     
+     console.log("You have exited the game");
+     
     
   }
+} 
   
   //This puts the rover in the table in a random number (executed once every time a move executes), x y would be the rover position. (current)
 function initialize_rover(x,y){
-  
+  current_rover_x = x;
+  current_rover_y = y;
+  //This uploads the position of the rover at every time it is executed
   if(x == 10){
     table[x][y] = " 0 |\n";
   }
@@ -215,18 +284,13 @@ function sg(){
     var rover_y = math.floor(math.random()*11);
     
 
-    current_rover_x = rover_x;
-    current_rover_y = rover_y;
-
-
-
     do{
         win_global_x = math.floor(math.random()*11);
         win_global_y = math.floor(math.random()*11);
           
       }while(win_global_x == rover_starter_x || win_global_y == rover_starter_y);
 
-      
+
       creating_table();
       ini_win(win_global_x, win_global_y);
       ini_obstacles();
@@ -239,47 +303,50 @@ function sg(){
   
   
 function south(x,y){
+  if(x > 10 || y > 10){
+    console.log("You can't go there or you'll fall off the edge!");
+  }
+  else{      
+
       y--;
-      current_rover_y--;
-      creating_table();
-      ini_win(win_global_x, win_global_y); 
-      impl_obstacles();
       initialize_rover(x,y);
       print_table();
       console.log("The rover moves South");
-  
+      }
   } 
-  
+
 function north(x,y){
+  if(x > 10 || y > 10){
+    console.log("You can't go there or you'll fall off the edge!");
+  }
+  else{
       y++;
-      current_rover_y++;
-      creating_table();
-      ini_win(win_global_x, win_global_y); 
       initialize_rover(x,y);
-      impl_obstacles();
       print_table();
       console.log("The rover moves North");
     }
+  }
 function east(x,y){
-      current_rover_x--;
-      creating_table();
-      ini_win(win_global_x, win_global_y); 
-      impl_obstacles();
+  if(x > 10 || y > 10){
+    console.log("You can't go there or you'll fall off the edge!");
+  }
+  else{
       initialize_rover(x,y);
       print_table();
       console.log("The rover moves East");
     }
+  }
 function west(x,y){
-      x++;
-      current_rover_x++;
-      creating_table();
-      ini_win(win_global_x, win_global_y);
-      impl_obstacles(); 
+  if(x > 10 || y > 10){
+    console.log("You can't go there or you'll fall off the edge!");
+  }
+  else{
+      x++; 
       initialize_rover(x,y);
       print_table();
       console.log("The rover moves West");
     }
-
+  }
 
 //Initializing finish line
 function ini_win(x,y){
