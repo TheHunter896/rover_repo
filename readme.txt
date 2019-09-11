@@ -1,4 +1,4 @@
-Hello and Welcome to the instructions of the Rover game.
+Docs:
 
 The game has only 1 JavaScript file and 1 HTML file to ask the user what to do, keep in mind
 that this game is meant for the terminal (cmd) of the web browser you are using and that
